@@ -1,8 +1,11 @@
 import "../assets/css/style.css";
 import SignupImg from "../assets/img/sign-up-img.svg";
 import Logo from "../assets/img/logo.svg";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Login() {
+  const [name, setName] = useState("");
   return (
     <div className="Container">
       <div className="form-container">
@@ -12,13 +15,26 @@ export default function Login() {
             <h2 className="title">تسجيل الدخول</h2>
             <div className="input-feild">
               <i className="fas fa-user focus-color"></i>
-              <input type="email" placeholder="البريد الالكتروني" />
+              <input
+                type="email"
+                placeholder="البريد الالكتروني"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
             </div>
             <div className="input-feild">
               <i className="fas fa-lock focus-color"></i>
               <input type="password" placeholder="كلمة المرور" />
             </div>
-            <input type="submit" value={"تسجيل الدخول"} className="btn solid" />
+            <Link to="/dashboard">
+              <input
+                type="submit"
+                value={"تسجيل الدخول"}
+                className="btn solid"
+              />
+            </Link>
           </form>
           <form className="sign-up-form">
             <h2 className="title">انشاء حساب</h2>

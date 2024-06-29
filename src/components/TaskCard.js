@@ -1,22 +1,30 @@
 import { Badge } from "react-bootstrap";
 
-export default function TaskCard() {
+export default function TaskCard({
+  id,
+  title,
+  category,
+  priority,
+  startTime,
+  endTime,
+  isCompleted,
+}) {
   return (
     <div className="task-card">
       <div className="d-flex justify-content-between">
         <div className="d-flex gap-3 align-items-start">
           <button className="checkbox"></button>
           <div className="task-content">
-            <h5>تصميم تطبيق للطقس</h5>
-            <p>شخصي</p>
+            <h5>{title}</h5>
+            <p>{category}</p>
             <div className="task-time">
               <p>
-                <strong className="ms-1">5:30</strong>
+                <strong className="ms-1">{startTime}</strong>
                 مساء
               </p>
               -
               <p>
-                <strong className="ms-1">5:50</strong>
+                <strong className="ms-1">{endTime}</strong>
                 مساء
               </p>
             </div>

@@ -7,7 +7,7 @@ import "../assets/css/style.css";
 
 export default function DailyTasks() {
   return (
-    <div className="daily-task mt-3 flex-column align-items-center justify-content-center">
+    <div className="daily-task flex-column align-items-center justify-content-center">
       <p>الانجاز اليومي</p>
       <div className="progress-container">
         <CircularProgressbarWithChildren
