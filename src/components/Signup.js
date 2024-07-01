@@ -1,48 +1,49 @@
 import "../assets/css/style.css";
-import SignipImg from "../assets/img/sign-in-img.svg";
+import SignupImg from "../assets/img/sign-up-img.svg";
 import Logo from "../assets/img/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Login() {
+export default function Signup() {
   const navigate = useNavigate();
-  const [formInput, setformInput] = useState({
+  const [formInput, setFormInput] = useState({
     email: "",
+    name: "",
     password: "",
   });
   const [error, setError] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     const users = JSON.parse(localStorage.getItem("user")) || [];
-    const loggedUser = users.find(
-      (user) =>
-        user.email === formInput.email && user.password === formInput.password
-    );
-    if (loggedUser) {
-      // Store the logged-in user in local storage
-      localStorage.setItem("loggedInUser", true);
-      navigate("/dashboard", { state: loggedUser.id });
-    } else {
-      setError("البريد الالكتروني او كلمة المرور غير صحيحة");
+    const existingUser = users.find((user) => user.email === formInput.email);
+    if (existingUser) {
+      setError("البريد الالكتروني موجود مسبقا");
+      return;
     }
-    // if (
-    //   formInput.email === loggedUser.email &&
-    //   formInput.password === loggedUser.password
-    // ) {
-    //   localStorage.setItem("loggedin", true);
-    //   navigate("/dashboard");
-    // } else {
-    //   alert("wrong email or password");
-    // }
+    const newUser = {
+      id: uuidv4(),
+      email: formInput.email,
+      name: formInput.name,
+      password: formInput.password,
+    };
+    users.push(newUser);
+    localStorage.setItem("user", JSON.stringify(users));
+    setFormInput({
+      email: "",
+      name: "",
+      password: "",
+    });
+    navigate("/");
   };
+
   return (
     <div className="Container">
       <div className="form-container">
         <div className="signin-signup">
           <form className="sign-in-form" onSubmit={handleSubmit}>
             <img src={Logo} alt="" className="logo" />
-            <h2 className="title">تسجيل الدخول</h2>
+            <h2 className="title">تسجيل حساب</h2>
             <div className="input-feild">
               <i className="fas fa-user focus-color"></i>
               <input
@@ -50,7 +51,18 @@ export default function Login() {
                 placeholder="البريد الالكتروني"
                 value={formInput.email}
                 onChange={(e) => {
-                  setformInput({ ...formInput, email: e.target.value });
+                  setFormInput({ ...formInput, email: e.target.value });
+                }}
+              />
+            </div>
+            <div className="input-feild">
+              <i className="fas fa-user focus-color"></i>
+              <input
+                type="text"
+                placeholder="الاسم"
+                value={formInput.name}
+                onChange={(e) => {
+                  setFormInput({ ...formInput, name: e.target.value });
                 }}
               />
             </div>
@@ -60,28 +72,28 @@ export default function Login() {
                 type="password"
                 value={formInput.password}
                 onChange={(e) => {
-                  setformInput({ ...formInput, password: e.target.value });
+                  setFormInput({ ...formInput, password: e.target.value });
                 }}
                 placeholder="كلمة المرور"
               />
             </div>
             <p className="text-danger">{error}</p>
-            <input type="submit" value={"تسجيل الدخول"} className="btn solid" />
+            <input type="submit" value={"تسجيل حساب"} className="btn solid" />
           </form>
         </div>
       </div>
       <div className="panels-container">
         <div className="panel left-panel">
           <div className="content">
-            <h3>اليس لديك حساب ؟</h3>
-            <p>لاتفقد تركيزك و قم بزيادة انتاجيتك معنا</p>
-            <Link to={"/signup"}>
+            <h3>لديك حساب في مهامي ؟</h3>
+            <p>لاتفقد تركيزك و قم بتسجيل الدخول لزيادة انتاجيتك معنا</p>
+            <Link to={"/"}>
               <button className="btn transparent" id="sign-up-btn">
-                تسجيل حساب
+                تسجيل دخول
               </button>
             </Link>
           </div>
-          <img src={SignipImg} className="image" alt="" />
+          <img src={SignupImg} className="image" alt="" />
         </div>
       </div>
     </div>

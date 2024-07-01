@@ -4,8 +4,8 @@ export const Tasks = [
   {
     id: uuidv4(),
     title: "تصميم برنامج للطقس",
-    category: "عمل",
-    priority: "ضروري",
+    category: "personal",
+    priority: "1",
     startTime: "5:30 AM",
     endTime: "6:30 PM",
     userId: 1,

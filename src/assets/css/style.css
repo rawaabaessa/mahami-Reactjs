@@ -10,6 +10,7 @@
   --managment-bg: #f9f9f9;
   --necessary: #abc421;
   --normal: #f9dac2;
+  --border-radious: 15px;
 }
 @font-face {
   font-family: Tajawal;
@@ -24,6 +25,16 @@
 @font-face {
   font-family: Tajawal;
   src: url("../font/Tajawal-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("../font/Roboto-Light.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("../font/Roboto-Regular.ttf");
   font-weight: 400;
 }
 * {
@@ -160,13 +171,12 @@ form.sign-up-form {
 .panels-container {
   direction: ltr;
   position: absolute;
-  width: 100%;
+  width: 50%;
   height: 100%;
   top: 0;
   left: 0;
-  /* background-color: green; */
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
 }
 .panel {
   display: flex;
@@ -306,7 +316,7 @@ form.sign-up-form {
 .remain-tasks {
   background-color: var(--white-color);
   display: flex;
-  border-radius: 5px;
+  border-radius: var(--border-radious);
   padding: 25px;
 }
 .remain-tasks {
@@ -429,7 +439,8 @@ form.sign-up-form {
 .task-card {
   background-color: var(--white-color);
   padding: 18px;
-  border-radius: 10px;
+  border-radius: var(--border-radious);
+  transition: all 0.3s;
 }
 .checkbox {
   width: 30px;
@@ -553,11 +564,20 @@ btn-popup-close {
 .important {
   color: var(--main-color);
 }
+.important-bg {
+  background-color: var(--main-color) !important;
+}
 .normal {
   color: var(--normal);
 }
+.normal-bg {
+  background-color: var(--normal) !important;
+}
 .necessary {
   color: var(--necessary);
+}
+.necessary-bg {
+  background-color: var(--necessary) !important;
 }
 .necessary + p,
 .normal + p,
@@ -565,7 +585,7 @@ btn-popup-close {
   font-weight: 700;
 }
 .task-badge {
-  background-color: var(--necessary) !important;
+  /* background-color: var(--necessary) !important; */
   color: white !important;
 }
 .logout {
@@ -664,7 +684,7 @@ btn-popup-close {
   width: 350px;
   max-width: 100%;
   background: white;
-  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: Roboto;
   line-height: 1.125em;
 }
 
@@ -718,6 +738,7 @@ btn-popup-close {
 
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
+  border-radius: 15px;
   background-color: #e6e6e6;
 }
 
@@ -781,15 +802,17 @@ btn-popup-close {
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
+  border-radius: 50%;
   background-color: #e6e6e6;
 }
 
 .react-calendar__tile--now {
-  background: #ffff76;
+  /* background: #ffff76; */
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
+  border-radius: 50%;
   background: #ffffa9;
 }
 
@@ -821,7 +844,7 @@ btn-popup-close {
   align-items: center;
   justify-content: center;
   background-color: var(--white-color);
-  border-radius: 15px;
+  border-radius: var(--border-radious);
   padding: 15px;
 }
 .dropdown {
@@ -852,4 +875,22 @@ btn-popup-close {
 }
 .dropdown-menu {
   width: 100%;
+}
+.is-completed {
+  opacity: 0.5;
+}
+.is-completed h5 {
+  text-decoration: line-through;
+}
+.is-completed-bg {
+  background-image: url("../img/check.svg");
+  background-size: cover;
+  border: none;
+}
+.no-task {
+  text-align: center;
+  opacity: 0.3;
+  font-weight: 700;
+  font-size: 18px;
+  /* color: var(--input-feild-bg); */
 }

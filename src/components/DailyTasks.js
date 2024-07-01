@@ -5,13 +5,18 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import "../assets/css/style.css";
 
-export default function DailyTasks() {
+export default function DailyTasks({ noneCompletedTaskCount, taskCount }) {
+  let progressPercentage = 0;
+  if (taskCount > 0) {
+    progressPercentage =
+      ((taskCount - noneCompletedTaskCount) / taskCount) * 100;
+  }
   return (
     <div className="daily-task flex-column align-items-center justify-content-center">
       <p>الانجاز اليومي</p>
       <div className="progress-container">
         <CircularProgressbarWithChildren
-          value={80}
+          value={progressPercentage}
           strokeWidth={3}
           styles={buildStyles({
             textSize: "16px",
@@ -21,9 +26,9 @@ export default function DailyTasks() {
           })}
         >
           <div className="progress-child">
-            <p className="progress-num">8</p>
+            <p className="progress-num">{noneCompletedTaskCount}</p>
             <p className="progress-num">متبقي</p>
-            <span>من مجموع 9</span>
+            <span>من مجموع {taskCount}</span>
           </div>
         </CircularProgressbarWithChildren>
       </div>
