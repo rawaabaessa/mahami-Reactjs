@@ -14,16 +14,16 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<ProtectedRoutes />}>
-        <Route
-          path="/dashboard"
-          element={
-            <TaskContext.Provider value={{ tasks, setTasks }}>
-              <Managment />
-            </TaskContext.Provider>
-          }
-        />
-      </Route>
+      {/* <Route path="/dashboard" element={<ProtectedRoutes />}> */}
+      <Route
+        path="/dashboard"
+        element={
+          <TaskContext.Provider value={{ tasks, setTasks }}>
+            <Managment />
+          </TaskContext.Provider>
+        }
+      />
+      {/* </Route> */}
       <Route path="/signup" element={<Signup />} />
     </Routes>
   );
