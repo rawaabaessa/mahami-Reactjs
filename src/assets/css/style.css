@@ -322,7 +322,7 @@ form.sign-up-form {
 }
 .task-num {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   background-color: var(--semi-gray-color);
   color: var(--white-color);
