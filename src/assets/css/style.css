@@ -485,8 +485,8 @@ form.sign-up-form {
 .btn-popup-close:hover {
   border: none;
 }
-.btn-popup,
-.btn-popup-close {
+btn-popup,
+btn-popup-close {
   width: 120px !important;
   height: 45px !important;
   border-radius: 49px;
