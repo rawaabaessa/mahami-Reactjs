@@ -764,6 +764,7 @@ btn-popup-close {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  text-wrap: wrap;
 }
 .dropdown-toggle::after {
   display: none;
@@ -801,6 +802,14 @@ btn-popup-close {
   flex-direction: column;
   gap: 1rem;
 }
+::-webkit-scrollbar {
+  width: 8px;
+  margin: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: var(--border-radious);
+}
 @media (max-width: 1050px) {
   .react-calendar__month-view__weekdays {
     font-size: 7px;
@@ -826,11 +835,11 @@ btn-popup-close {
     font-size: 12px;
   }
 }
-::-webkit-scrollbar {
-  width: 8px;
-  margin: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--main-color);
-  border-radius: var(--border-radious);
+@media (max-width: 400px) {
+  .task-content p,
+  .task-time {
+    font-size: 10px;
+  }
+  .task-time {
+  }
 }
