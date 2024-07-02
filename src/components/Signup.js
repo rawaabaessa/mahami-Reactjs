@@ -45,7 +45,7 @@ export default function Signup() {
             <img src={Logo} alt="" className="logo" />
             <h2 className="title">تسجيل حساب</h2>
             <div className="input-feild">
-              <i className="fas fa-user focus-color"></i>
+              <i class="fa-solid fa-envelope focus-color"></i>
               <input
                 type="email"
                 placeholder="البريد الالكتروني"

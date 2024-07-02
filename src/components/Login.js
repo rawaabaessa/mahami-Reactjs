@@ -3,7 +3,6 @@ import SignipImg from "../assets/img/sign-in-img.svg";
 import Logo from "../assets/img/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,21 +19,11 @@ export default function Login() {
         user.email === formInput.email && user.password === formInput.password
     );
     if (loggedUser) {
-      // Store the logged-in user in local storage
       localStorage.setItem("loggedInUser", true);
       navigate("/dashboard", { state: loggedUser.id });
     } else {
       setError("البريد الالكتروني او كلمة المرور غير صحيحة");
     }
-    // if (
-    //   formInput.email === loggedUser.email &&
-    //   formInput.password === loggedUser.password
-    // ) {
-    //   localStorage.setItem("loggedin", true);
-    //   navigate("/dashboard");
-    // } else {
-    //   alert("wrong email or password");
-    // }
   };
   return (
     <div className="Container">
@@ -44,7 +33,7 @@ export default function Login() {
             <img src={Logo} alt="" className="logo" />
             <h2 className="title">تسجيل الدخول</h2>
             <div className="input-feild">
-              <i className="fas fa-user focus-color"></i>
+              <i class="fa-solid fa-envelope focus-color"></i>
               <input
                 type="email"
                 placeholder="البريد الالكتروني"

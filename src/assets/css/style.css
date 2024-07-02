@@ -2,11 +2,11 @@
   --main-color: #9854cb;
   --hover-color: #60328c;
   --dark-color: #333;
-  --placeholder-color: #aaa;
-  --icon-color: #acacac;
+  --light-gray-color: #aaa;
+  --dark-gray-color: #acacac;
   --white-color: #fff;
   --title-color: #444;
-  --input-feild-bg: #f0f0f0;
+  --semi-gray-color: #f0f0f0;
   --managment-bg: #f9f9f9;
   --necessary: #abc421;
   --normal: #f9dac2;
@@ -25,16 +25,6 @@
 @font-face {
   font-family: Tajawal;
   src: url("../font/Tajawal-Regular.ttf");
-  font-weight: 400;
-}
-@font-face {
-  font-family: Roboto;
-  src: url("../font/Roboto-Light.ttf");
-  font-weight: 300;
-}
-@font-face {
-  font-family: Roboto;
-  src: url("../font/Roboto-Regular.ttf");
   font-weight: 400;
 }
 * {
@@ -116,7 +106,7 @@ form.sign-up-form {
   max-width: 380px;
   width: 100%;
   height: 55px;
-  background-color: var(--input-feild-bg);
+  background-color: var(--semi-gray-color);
   margin: 10px 0;
   border-radius: 55px;
   display: grid;
@@ -126,7 +116,7 @@ form.sign-up-form {
 .input-feild i {
   text-align: center;
   line-height: 55px;
-  color: var(--icon-color);
+  color: var(--dark-gray-color);
   font-size: 1.1rem;
   transition: all 0.5s;
 }
@@ -147,7 +137,7 @@ form.sign-up-form {
   color: var(--main-color);
 }
 .input-feild input::placeholder {
-  color: var(--placeholder-color);
+  color: var(--light-gray-color);
   font-weight: 500;
 }
 .btn {
@@ -244,7 +234,6 @@ form.sign-up-form {
     transform: translate(-50%, -100%);
   }
   .panels-container {
-    /* background-color: green; */
     z-index: 10;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 1fr;
@@ -310,7 +299,7 @@ form.sign-up-form {
 .user-greating {
   font-size: 14px;
   margin-bottom: 0;
-  color: var(--placeholder-color);
+  color: var(--light-gray-color);
 }
 .daily-task,
 .remain-tasks {
@@ -335,7 +324,7 @@ form.sign-up-form {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--input-feild-bg);
+  background-color: var(--semi-gray-color);
   color: var(--white-color);
   height: 25px;
   width: 25px;
@@ -370,10 +359,10 @@ form.sign-up-form {
   margin-right: 10px;
 }
 .search i {
-  color: var(--icon-color);
+  color: var(--dark-gray-color);
 }
 .search input::placeholder {
-  color: var(--placeholder-color);
+  color: var(--light-gray-color);
 }
 .daily-task p {
   text-align: center;
@@ -383,29 +372,29 @@ form.sign-up-form {
 
 /* progress */
 .progress-container {
-  height: 200px;
-  width: 200px;
+  max-height: 200px;
+  max-width: 200px;
 }
 .progress-num {
   font-size: 25px !important;
   line-height: 0.5;
 }
 .progress-num + span {
-  color: var(--icon-color);
+  color: var(--dark-gray-color);
   font-size: 12px;
 }
 
 /* tasks */
 
 .task-div {
-  border-bottom: 2px solid var(--input-feild-bg);
+  border-bottom: 2px solid var(--semi-gray-color);
 }
 .task-count p {
-  color: var(--icon-color);
+  color: var(--dark-gray-color);
   font-size: 16px;
 }
 .task-count div {
-  background-color: var(--input-feild-bg);
+  background-color: var(--semi-gray-color);
   color: var(--main-color);
   font-weight: 700;
   display: flex;
@@ -418,10 +407,10 @@ form.sign-up-form {
 .necessary-task p {
   font-weight: 700;
   font-size: 16px;
-  color: var(--icon-color);
+  color: var(--dark-gray-color);
 }
 .necessary-task button {
-  border: 1px solid var(--input-feild-bg);
+  border: 1px solid var(--semi-gray-color);
   background-color: transparent;
   width: 30px;
   color: var(--main-color);
@@ -454,14 +443,14 @@ form.sign-up-form {
   margin: 0;
 }
 .task-content p {
-  color: var(--icon-color);
+  color: var(--dark-gray-color);
   font-size: 14px;
 }
 .task-time {
   display: flex;
   gap: 5px;
   font-size: 14px;
-  background-color: var(--input-feild-bg);
+  background-color: var(--semi-gray-color);
   width: fit-content;
   padding: 5px 10px;
   border-radius: 20px;
@@ -473,7 +462,7 @@ form.sign-up-form {
   color: var(--dark-color);
 }
 .task-mng button {
-  color: var(--icon-color);
+  color: var(--dark-gray-color);
   font-size: 14px;
   background-color: transparent;
   border: none;
@@ -509,7 +498,7 @@ btn-popup-close {
 }
 .task-input {
   width: 100%;
-  border: 1px solid var(--input-feild-bg);
+  border: 1px solid var(--semi-gray-color);
   padding: 10px;
   border-radius: 10px;
 }
@@ -521,7 +510,7 @@ btn-popup-close {
 .task-input i {
   font-size: 18px;
   margin-left: 5px;
-  color: var(--icon-color);
+  color: var(--dark-gray-color);
 }
 .priorty,
 .category {
@@ -585,7 +574,6 @@ btn-popup-close {
   font-weight: 700;
 }
 .task-badge {
-  /* background-color: var(--necessary) !important; */
   color: white !important;
 }
 .logout {
@@ -595,96 +583,12 @@ btn-popup-close {
 }
 .logout:hover {
   color: var(--main-color);
-  animation-name: logoutbtn;
-  animation-duration: 0.5;
-  animation-iteration-count: 1;
-  /* animation-timing-function: ease-in-out; */
 }
-@keyframes logoutbtn {
-  to {
-    transform: translateY(20px);
-  }
-}
-
-/* drop down */
-.dropdown {
-  min-width: 30%;
-  position: relative;
-  /* margin: 2rem; */
-}
-.select {
-  background-color: var(--white-color);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--icon-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* border: 2px solid var(--icon-color); */
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-.select-clicked {
-  border: 2px var(--icon-color) solid;
-  box-shadow: 0 0 0.8em var(--icon-color);
-}
-.select:hover {
-  background: var(--input-feild-bg);
-}
-.caret {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid var(--icon-color);
-  transition: 0.3s;
-}
-.caret-rotate {
-  transform: rotate(180deg);
-}
-.menu {
-  list-style: none;
-  padding: 0.2em 0.5em;
-  background-color: var(--white-color);
-  border: 1px solid var(--white-color);
-  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
-  border-radius: 0.5em;
-  color: var(--dark-color);
-  position: absolute;
-  top: 3em;
-  left: 50%;
-  width: 100%;
-  transform: translateX(-50%);
-  opacity: 0;
-  display: none;
-  transition: 0.2s;
-  z-index: 1;
-}
-.menu li {
-  padding: 0.7em 0.5em;
-  margin: 0.3em 0;
-  border-radius: 0.5em;
-  cursor: pointer;
-}
-.menu li:hover {
-  background-color: var(--white-color);
-}
-.active {
-  background-color: var(--hover-color);
-}
-.menu-open {
-  display: block;
-  opacity: 1;
-}
-
 /* calender */
 .react-calendar {
   width: 350px;
   max-width: 100%;
   background: white;
-  font-family: Roboto;
   line-height: 1.125em;
 }
 
@@ -728,7 +632,7 @@ btn-popup-close {
 }
 
 .react-calendar__navigation button {
-  min-width: 44px;
+  min-width: 28px;
   background: none;
 }
 
@@ -738,15 +642,13 @@ btn-popup-close {
 
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: #e6e6e6;
 }
 
 .react-calendar__month-view__weekdays {
   text-align: center;
-  text-transform: uppercase;
-  font: inherit;
-  font-size: 0.75em;
+  font-size: 10px;
   font-weight: bold;
 }
 
@@ -802,32 +704,29 @@ btn-popup-close {
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  border-radius: 50%;
+  border-radius: 10px;
   background-color: #e6e6e6;
-}
-
-.react-calendar__tile--now {
-  /* background: #ffff76; */
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-  border-radius: 50%;
-  background: #ffffa9;
+  border-radius: 10px;
 }
 
 .react-calendar__tile--hasActive {
-  background: #76baff;
+  border-radius: 10px;
+  color: var(--white-color);
+  background: var(--main-color);
 }
 
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
-  background: #a9d4ff;
+  border-radius: 10px;
 }
 
 .react-calendar__tile--active {
   background: #9854cb !important;
-  border-radius: 50%;
+  border-radius: 10px;
   color: white;
 }
 
@@ -851,7 +750,6 @@ btn-popup-close {
   width: 30%;
 }
 .dropdown-btn {
-  /* text-align: center; */
   width: 100%;
   height: 100%;
   border: none;
@@ -860,7 +758,7 @@ btn-popup-close {
   border-radius: 5px;
   cursor: pointer;
   background-color: var(--white-color);
-  color: var(--placeholder-color);
+  color: var(--light-gray-color);
   font-size: 14px;
   transition: all 0.5s;
   display: flex;
@@ -868,7 +766,10 @@ btn-popup-close {
   justify-content: flex-start;
 }
 .dropdown-toggle::after {
-  margin-right: 60% !important;
+  display: none;
+}
+.dropdown li {
+  cursor: pointer;
 }
 .dropdown-btn li a {
   text-align: right !important;
@@ -892,5 +793,44 @@ btn-popup-close {
   opacity: 0.3;
   font-weight: 700;
   font-size: 18px;
-  /* color: var(--input-feild-bg); */
+}
+.scroll {
+  max-height: 66vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (max-width: 1050px) {
+  .react-calendar__month-view__weekdays {
+    font-size: 7px;
+  }
+  .toDo-img {
+    display: none;
+  }
+  .progress-num {
+    font-size: 18px !important;
+  }
+  .progress-num + span {
+    font-size: 10px;
+  }
+}
+@media (max-width: 766px) {
+  .react-calendar__month-view__weekdays {
+    font-size: 10px;
+  }
+  .progress-num {
+    font-size: 25px !important;
+  }
+  .progress-num + span {
+    font-size: 12px;
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+  margin: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: var(--border-radious);
 }

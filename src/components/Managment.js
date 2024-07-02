@@ -1,6 +1,6 @@
 import "../assets/css/style.css";
 import { Col, Row, Container, Button, Modal } from "react-bootstrap";
-import User from "../assets/img/user (2).png";
+import User from "../assets/img/user.png";
 import RemainTasks from "./RemainTasks";
 import DailyTasks from "./DailyTasks";
 import TaskCard from "./TaskCard";
@@ -13,10 +13,8 @@ import { TaskContext } from "../contexts/taskContext";
 
 export default function Managment() {
   const userData = useLocation();
-  // calender
   const [date, setDate] = useState(new Date().toLocaleDateString());
   const navigate = useNavigate();
-  console.log(userData);
   const userstorage = JSON.parse(localStorage.getItem("user"));
   const user = userstorage.find((user) => user.id === userData.state);
   const { tasks, setTasks } = useContext(TaskContext);
@@ -33,33 +31,44 @@ export default function Managment() {
   let taskToBeRendered = tasks;
 
   if (displayTaskType == "المكتملة") {
-    // taskToBeRendered = completedTask.filter((task) => {
-    //   return task.date == date;
-    // });
     taskToBeRendered = completedTask;
   } else if (displayTaskType == "غير المكتملة") {
-    // taskToBeRendered = noneCompletedTask.filter((task) => {
-    //   return task.date == date;
-    // });
     taskToBeRendered = noneCompletedTask;
   } else {
     taskToBeRendered = tasks.filter((task) => {
       return task.date == date && task.userId == user.id;
     });
-    // taskToBeRendered = tasks;
   }
 
-  const necessaryTask = taskToBeRendered.filter((task) => {
-    return task.priority === "1" && !task.isCompleted;
+  const necessaryTask = tasks.filter((task) => {
+    return (
+      task.priority === "1" &&
+      !task.isCompleted &&
+      task.date == date &&
+      task.userId == user.id
+    );
   });
-  const importantTask = taskToBeRendered.filter((task) => {
-    return task.priority === "2" && !task.isCompleted;
+  const importantTask = tasks.filter((task) => {
+    return (
+      task.priority === "2" &&
+      !task.isCompleted &&
+      task.date == date &&
+      task.userId == user.id
+    );
   });
-  const normalTask = taskToBeRendered.filter((task) => {
-    return task.priority === "3" && !task.isCompleted;
+  const normalTask = tasks.filter((task) => {
+    return (
+      task.priority === "3" &&
+      !task.isCompleted &&
+      task.date == date &&
+      task.userId == user.id
+    );
   });
 
-  let taskCount = taskToBeRendered.length;
+  let taskCount = tasks.filter((task) => {
+    return task.date == date && task.userId == user.id;
+  }).length;
+
   let necessaryTaskCount = necessaryTask.length;
   let importantTaskCount = importantTask.length;
   let normalTaskCount = normalTask.length;
@@ -78,7 +87,9 @@ export default function Managment() {
     endTime: "",
     date: new Date().toLocaleDateString(),
   });
+
   const [search, setSearch] = useState("");
+
   const handleAddTask = () => {
     const newTask = {
       id: uuidv4(),
@@ -88,7 +99,7 @@ export default function Managment() {
       startTime: addInput.startTime,
       endTime: addInput.endTime,
       userId: user.id,
-      date: addInput.date,
+      date: new Date(addInput.date).toLocaleDateString(),
       isCompleted: false,
     };
     const updatedTask = [...tasks, newTask];
@@ -105,39 +116,51 @@ export default function Managment() {
     });
   };
 
-  // useEffect(() => {
-  //   const storageTask = localStorage.getItem("todo") || [];
-  //   const storageTodo = JSON.parse(storageTask);
-  //   setTasks(storageTodo);
-  // }, []);
+  useEffect(() => {
+    const storageTask = localStorage.getItem("todo");
+    if (storageTask) {
+      try {
+        const storageTodo = JSON.parse(storageTask);
+        setTasks(storageTodo);
+      } catch (error) {
+        setTasks([]);
+      }
+    } else {
+      setTasks([]);
+    }
+  }, []);
 
-  let Tasklist = taskToBeRendered.map((task) => {
-    return (
-      <TaskCard
-        key={task.id}
-        id={task.id}
-        title={task.title}
-        priority={task.priority}
-        category={task.category}
-        startTime={task.startTime}
-        endTime={task.endTime}
-        date={task.date}
-        isCompleted={task.isCompleted}
-      />
-    );
-  });
+  let Tasklist = taskToBeRendered
+    .filter((task) => {
+      return search === "" ? task : task.title.includes(search);
+    })
+    .map((task) => {
+      return (
+        <TaskCard
+          key={task.id}
+          id={task.id}
+          title={task.title}
+          priority={task.priority}
+          category={task.category}
+          startTime={task.startTime}
+          endTime={task.endTime}
+          date={task.date}
+          isCompleted={task.isCompleted}
+        />
+      );
+    });
 
   const changeDisplayType = (type) => {
     setDisplayTaskType(type);
   };
   const handleLogout = () => {
-    localStorage.removeItem("loggedin");
+    localStorage.removeItem("loggedInUser");
     navigate("/");
   };
 
   return (
     <Container fluid className="managment-bg">
-      <Row className="m-3 gap-3">
+      <Row className="m-3 gap-3 media">
         <Col md={3}>
           <div className="d-flex flex-column gap-3">
             <div className="d-flex justify-content-between align-items-center">
@@ -240,14 +263,15 @@ export default function Managment() {
             ) : (
               ""
             )}
-            {Tasklist}
+            <div className="scroll">{Tasklist}</div>
           </div>
         </Col>
         <Col md={3}>
           <div className="d-flex flex-column gap-3">
             <div className="calender-container">
               <Calendar
-                // defaultView={"year"}
+                locale={"ar"}
+                calendarType={"islamic"}
                 onClickDay={(e) => {
                   setDate(e.toLocaleDateString());
                 }}
@@ -281,7 +305,6 @@ export default function Managment() {
               />
             </div>
             <div className="d-flex flex-column">
-              <div className=""></div>
               <div className="d-flex gap-2">
                 <div className="w-50">
                   <p className="task-prio mb-3">وقت البداية</p>
@@ -319,12 +342,12 @@ export default function Managment() {
             <input
               type="date"
               className="task-input"
+              name="date"
               value={addInput.date}
               onChange={(e) => {
-                const selectedDate = new Date(e.target.value);
                 setAddInput({
                   ...addInput,
-                  date: selectedDate.toLocaleDateString(),
+                  date: e.target.value,
                 });
               }}
             />

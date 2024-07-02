@@ -1,7 +1,6 @@
 import { Badge, Button, Modal } from "react-bootstrap";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { TaskContext } from "../contexts/taskContext";
-import { useState } from "react";
 
 export default function TaskCard({
   title,
@@ -29,7 +28,6 @@ export default function TaskCard({
     priority: priority,
     startTime: startTime,
     endTime: endTime,
-    date: date,
   });
 
   const handleCheck = () => {
@@ -59,7 +57,6 @@ export default function TaskCard({
           priority: EditInput.priority,
           startTime: EditInput.startTime,
           endTime: EditInput.endTime,
-          date: EditInput.date,
         };
       } else {
         return task;
@@ -69,6 +66,7 @@ export default function TaskCard({
     localStorage.setItem("todo", JSON.stringify(updatedTask));
     handleEditClose();
   };
+
   function convertTo12HourFormat(time24) {
     let [hours, minutes] = time24.split(":");
     let period = "AM";
@@ -147,11 +145,11 @@ export default function TaskCard({
       {/* delete popup */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>اضافة مهمة جديدة</Modal.Title>
+          <Modal.Title>حذف مهمة </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="d-flex flex-column gap-3">
-            <p>هل انت متاكد من حذف المهمة</p>
+            <p className="mb-0 fw-bold">هل انت متاكد من حذف المهمة</p>
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-content-start gap-2">
@@ -175,7 +173,7 @@ export default function TaskCard({
       {/* edit Popup */}
       <Modal show={showEdit} onHide={handleEditClose}>
         <Modal.Header>
-          <Modal.Title>اضافة مهمة جديدة</Modal.Title>
+          <Modal.Title>تعديل مهمة </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="d-flex flex-column gap-3">
@@ -193,49 +191,39 @@ export default function TaskCard({
               />
             </div>
             <div className="d-flex flex-column">
-              <div className="d-flex justify-content-between">
-                <p className="task-prio mb-0">وقت البداية</p>
-                <p className="task-prio mb-0">وقت النهاية</p>
-              </div>
-              <div className="d-flex justify-content-between">
-                <input
-                  type="time"
-                  className="task-input w-50 outline-none"
-                  value={EditInput.startTime}
-                  onChange={(e) => {
-                    setEditInput({
-                      ...EditInput,
-                      startTime: e.target.value,
-                    });
-                  }}
-                  required
-                />
-                <input
-                  type="time"
-                  className="task-input w-50 outline-none"
-                  value={EditInput.endTime}
-                  onChange={(e) => {
-                    setEditInput({
-                      ...EditInput,
-                      endTime: e.target.value,
-                    });
-                  }}
-                  required
-                />
+              <div className="d-flex gap-2">
+                <div className="w-50">
+                  <p className="task-prio mb-3">وقت البداية</p>
+                  <input
+                    type="time"
+                    className="task-input"
+                    value={EditInput.startTime}
+                    onChange={(e) => {
+                      setEditInput({
+                        ...EditInput,
+                        startTime: e.target.value,
+                      });
+                    }}
+                    required
+                  />
+                </div>
+                <div className="w-50">
+                  <p className="task-prio mb-3">وقت النهاية</p>
+                  <input
+                    type="time"
+                    className="task-input"
+                    value={EditInput.endTime}
+                    onChange={(e) => {
+                      setEditInput({
+                        ...EditInput,
+                        endTime: e.target.value,
+                      });
+                    }}
+                    required
+                  />
+                </div>
               </div>
             </div>
-            <p className="task-prio mb-0">التاريخ</p>
-            <input
-              type="date"
-              className="task-input"
-              value={date}
-              onChange={(e) => {
-                setEditInput({
-                  ...EditInput,
-                  date: e.target.value,
-                });
-              }}
-            />
             <p className="task-prio mb-0">الاولوية</p>
             <div className="priorty">
               <input
@@ -305,10 +293,8 @@ export default function TaskCard({
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-content-start gap-2">
-          {/* <Button>add</Button> */}
           <Button
             className="btn-popup"
-            // type="submit"
             variant="secondary"
             onClick={handleEditClick}
           >

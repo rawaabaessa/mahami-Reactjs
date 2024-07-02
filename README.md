@@ -9,7 +9,7 @@
 
 - [Installation](#installation)
 - [Features](#features)
-<!-- - [Screenshots](#screenshots) -->
+- [Screenshots](#screenshots)
 - [Technologies Used](#technologies-used)
 - [License](#license)
 
@@ -19,9 +19,9 @@
 2. Install dependencies using a package manager (e.g., `npm install` or `yarn install`)
 3. Install required packages :
    - `npm i react-bootstrab`
-   - `react-calender`
-   - `react-circular-progressbar`
-   - `react-router-dom`
+   - `npm i react-calender`
+   - `npm i react-circular-progressbar`
+   - `npm i react-router-dom`
 4. Start the development server (e.g., `npm start` or `yarn start`)
 
 ## Features
@@ -36,9 +36,26 @@
 - Delete Task
 - Mark tasks as completed
 - Filter tasks based on their status (completed , non completed)
+- Search for a specific task
 - Save each user's tasks in the local storage
 
-<!-- ## Screenshots -->
+## Screenshots
+
+<div align="center">
+  <img src="./src/assets/img/redmeImg/1.png" alt="Alt Text"  />
+</div>
+
+<div align="center">
+  <img src="./src/assets/img/redmeImg/2.png" alt="Alt Text"  />
+</div>
+
+<div align="center">
+  <img src="./src/assets/img/redmeImg/3.png" alt="Alt Text"  />
+</div>
+
+<div align="center">
+  <img src="./src/assets/img/redmeImg/4.png" alt="Alt Text"  />
+</div>
 
 ## Technologies Used
 
@@ -46,7 +63,7 @@
 - React Router
 - React-Bootstrab
 - React-Calender
-- react-circular-progressbar
+- React-Circular-Progressbar
 
 ## License
 
