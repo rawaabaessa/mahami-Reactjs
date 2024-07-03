@@ -13,10 +13,10 @@ function App() {
   const [tasks, setTasks] = useState(Tasks);
   return (
     <Routes>
-      <Route path="" element={<Login />} />
-      <Route path="dashboard" element={<ProtectedRoutes />}>
+      <Route path="/" element={<Login />} />
+      <Route path="/dashboard" element={<ProtectedRoutes />}>
         <Route
-          path="dashboard"
+          path="/dashboard"
           element={
             <TaskContext.Provider value={{ tasks, setTasks }}>
               <Managment />
@@ -24,7 +24,7 @@ function App() {
           }
         />
       </Route>
-      <Route path="signup" element={<Signup />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 }
