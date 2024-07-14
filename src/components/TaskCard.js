@@ -1,21 +1,13 @@
 import { Badge } from "react-bootstrap";
-import { useContext } from "react";
-import { TaskContext } from "../contexts/taskContext";
-import { ToastContext } from "../contexts/ToastContext";
+import { useTaskDispatch } from "../contexts/taskContext";
+import { useToast } from "../contexts/ToastContext";
 
 export default function TaskCard({ showDelete, showEdit, todo }) {
-  const { tasks, setTasks } = useContext(TaskContext);
-  const { showHideToast } = useContext(ToastContext);
+  const dispatch = useTaskDispatch();
+  const { showHideToast } = useToast();
 
   const handleCheck = () => {
-    const updatedTask = tasks.map((task) => {
-      if (task.id == todo.id) {
-        task.isCompleted = !task.isCompleted;
-      }
-      return task;
-    });
-    setTasks(updatedTask);
-    localStorage.setItem("todo", JSON.stringify(updatedTask));
+    dispatch({ type: "check", payload: todo });
     showHideToast("تم التعديل بنجاح");
   };
 

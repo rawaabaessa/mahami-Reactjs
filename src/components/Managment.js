@@ -4,12 +4,11 @@ import User from "../assets/img/user.png";
 import RemainTasks from "./RemainTasks";
 import DailyTasks from "./DailyTasks";
 import TaskCard from "./TaskCard";
-import { useState, useContext, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Calendar from "react-calendar";
 import todoImg from "../assets/img/to-do-img.svg";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { useTask } from "../contexts/taskContext";
+import { useTask, useTaskDispatch } from "../contexts/taskContext";
 import { useToast } from "../contexts/ToastContext";
 
 export default function Managment() {
@@ -18,7 +17,8 @@ export default function Managment() {
   const navigate = useNavigate();
   const userstorage = JSON.parse(localStorage.getItem("user"));
   const user = userstorage.find((user) => user.id === userData.state);
-  const { tasks, setTasks } = useTask();
+  const tasks = useTask();
+  const dispatch = useTaskDispatch();
   const { showHideToast } = useToast();
   const [displayTaskType, setDisplayTaskType] = useState("الكل");
   const [currentTask, setCurrentTask] = useState({
@@ -97,20 +97,7 @@ export default function Managment() {
   const [search, setSearch] = useState("");
 
   const handleAddTask = () => {
-    const newTask = {
-      id: uuidv4(),
-      title: addInput.title,
-      category: addInput.category,
-      priority: addInput.priority,
-      startTime: addInput.startTime,
-      endTime: addInput.endTime,
-      userId: user.id,
-      date: new Date(addInput.date).toLocaleDateString(),
-      isCompleted: false,
-    };
-    const updatedTask = [...tasks, newTask];
-    setTasks(updatedTask);
-    localStorage.setItem("todo", JSON.stringify(updatedTask));
+    dispatch({ type: "add", payload: { addInput: addInput, userId: user.id } });
     handleClose();
     setAddInput({
       title: "",
@@ -124,17 +111,7 @@ export default function Managment() {
   };
 
   useEffect(() => {
-    const storageTask = localStorage.getItem("todo");
-    if (storageTask) {
-      try {
-        const storageTodo = JSON.parse(storageTask);
-        setTasks(storageTodo);
-      } catch (error) {
-        setTasks([]);
-      }
-    } else {
-      setTasks([]);
-    }
+    dispatch({ type: "get" });
   }, []);
 
   let Tasklist = taskToBeRendered
@@ -162,32 +139,13 @@ export default function Managment() {
   };
 
   const handleDeleteClick = () => {
-    const updatedTasks = tasks.filter((task) => {
-      return task.id != currentTask.id;
-    });
-    setTasks(updatedTasks);
-    localStorage.setItem("todo", JSON.stringify(updatedTasks));
+    dispatch({ type: "delete", payload: currentTask.id });
     handleDeleteClose();
     showHideToast("تم الحذف بنجاح");
   };
 
   const handleEditClick = () => {
-    const updatedTask = tasks.map((task) => {
-      if (task.id == currentTask.id) {
-        return {
-          ...task,
-          title: currentTask.title,
-          category: currentTask.category,
-          priority: currentTask.priority,
-          startTime: currentTask.startTime,
-          endTime: currentTask.endTime,
-        };
-      } else {
-        return task;
-      }
-    });
-    setTasks(updatedTask);
-    localStorage.setItem("todo", JSON.stringify(updatedTask));
+    dispatch({ type: "edit", payload: currentTask });
     handleEditClose();
     showHideToast("تم التعديل بنجاح");
   };

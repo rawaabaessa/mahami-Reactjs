@@ -4,7 +4,7 @@ import toDo from "../assets/img/to-do.svg";
 import { useTask } from "../contexts/taskContext";
 
 export default function RemainTasks({ date, userId, noneCompletedTaskCount }) {
-  const { tasks } = useTask();
+  const tasks = useTask();
   const necessaryTaskCount = useMemo(() => {
     return tasks.filter((task) => {
       return (

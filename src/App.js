@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/Login";
 import Managment from "./components/Managment";
 import Signup from "./components/Signup";
-import SnackBar from "./components/SnackBar";
 import ProtectedRoutes from "./services/ProtectedRoutes";
 import { Route, Routes } from "react-router-dom";
 import { TaskProvider } from "./contexts/taskContext";
